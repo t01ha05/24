@@ -1,16 +1,14 @@
 /* 
  * Title: Goat Manager 3001 
- * Description: This program manages a collection of goats, allowing users to add, delete, 
- *              and list goats. It randomly assigns names, colors, and ages to the goats 
- *              based on data loaded from files.
+ * Description: Converted Lab 23 to a std::set.
  * Author: Talha Ahmed 
- * Lab: 23
+ * Lab: 24
  * Class: COMSC-210 
  */
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <list>
+#include <set> //change to set 
 #include <cstdlib>
 #include <ctime>
 #include "Goat.h"
@@ -18,15 +16,15 @@ using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
-//reorganize for readability
-void add_goat(list<Goat> &trip, string names[], string colors[], int name_count, int color_count);
-void delete_goat(list<Goat> &trip);
-void display_trip(list<Goat> &trip);
+//reorganize for readability <updated function prototypes>
+void add_goat(set<Goat> &trip, string names[], string colors[], int name_count, int color_count);
+void delete_goat(set<Goat> &trip);
+void display_trip(set<Goat> &trip);
 int main_menu();
 
 int main() {
     srand(static_cast<unsigned int>(time(0)));
-    list<Goat> trip; //list to store goat objects
+    set<Goat> trip; //list to store goat objects <changed from list to set>
     string names[SZ_NAMES];
     string colors[SZ_COLORS];
     int name_count = 0, color_count = 0;
