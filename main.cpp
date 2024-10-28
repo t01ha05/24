@@ -104,21 +104,25 @@ while(!valid) {
    return choice;
 }
 
-void add_goat(list<Goat> &trip, string names[], string colors[], int name_count, int color_count) {
+void add_goat(set<Goat> &trip, string names[], string colors[], int name_count, int color_count) {
     int rand_name = rand() % name_count;
     int rand_color = rand() % color_count;
     int age = rand() % (MAX_AGE + 1);
 
-    //create new goat objecty
+    //create new goat object
     Goat new_goat(names[rand_name], age, colors[rand_color]);
-    trip.push_back(new_goat);
-
-     cout << "\nGoat added: " << names[rand_name] << "Color: " << colors[rand_color] << ", Age: " << age;
-     cout << "\nTotal goats: " << trip.size() << "\n";
+   
+    auto result = trip.insert(new_goat);
+    if (result.second) {
+        cout << "\nGoat added: " << names[rand_name] << ", Color: " << colors[rand_color] << ", Age: " << age;
+    } else {
+        cout << "\nDuplicate goat not added.\n";
+    }
+    cout << "\nTotal goats: " << trip.size() << "\n";
 }
 
 //function to delete goat from list
-void delete_goat(list<Goat> &trip) {
+void delete_goat(set<Goat> &trip) {
     if(trip.empty()) {
         cout << "No goat to delete.\n";
         return;
@@ -149,7 +153,7 @@ void delete_goat(list<Goat> &trip) {
     cout << "Goat deleted";
 }
 
-void display_trip(list<Goat> &trip) {
+void display_trip(set<Goat> &trip) {
     if(trip.empty()) {
         cout << "No goats in the trip";
         return;
